@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1218485F1AAE901300480744 /* YZNameFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1218485E1AAE901300480744 /* YZNameFormatter.swift */; };
+		1218486F1AAEB08F00480744 /* YZNameFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1218485E1AAE901300480744 /* YZNameFormatter.swift */; };
 		1273C3EE1AAE4AAF0015744D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1273C3ED1AAE4AAF0015744D /* AppDelegate.swift */; };
 		1273C3F01AAE4AAF0015744D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1273C3EF1AAE4AAF0015744D /* ViewController.swift */; };
 		1273C3F31AAE4AAF0015744D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1273C3F11AAE4AAF0015744D /* Main.storyboard */; };
@@ -26,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1218485E1AAE901300480744 /* YZNameFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZNameFormatter.swift; sourceTree = "<group>"; };
 		1273C3E81AAE4AAF0015744D /* NameFormatterDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NameFormatterDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1273C3EC1AAE4AAF0015744D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1273C3ED1AAE4AAF0015744D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		1273C40D1AAE4ABC0015744D /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				1218485E1AAE901300480744 /* YZNameFormatter.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -223,6 +227,7 @@
 			files = (
 				1273C3F01AAE4AAF0015744D /* ViewController.swift in Sources */,
 				1273C3EE1AAE4AAF0015744D /* AppDelegate.swift in Sources */,
+				1218485F1AAE901300480744 /* YZNameFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1218486F1AAEB08F00480744 /* YZNameFormatter.swift in Sources */,
 				1273C4041AAE4AAF0015744D /* NameFormatterDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +420,7 @@
 				1273C4091AAE4AAF0015744D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1273C40A1AAE4AAF0015744D /* Build configuration list for PBXNativeTarget "NameFormatterDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +429,7 @@
 				1273C40C1AAE4AAF0015744D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
