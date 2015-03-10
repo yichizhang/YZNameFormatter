@@ -42,7 +42,7 @@ class NameFormatterDemoTests: XCTestCase {
 		
 		nameString = "Assoc Professor Philip Wilksch"
 		name = formatter.nameFrom(string: nameString)
-		XCTAssertEqual(name.prefix, "Assoc Professsor", "1")
+		XCTAssertEqual(name.prefix, "Assoc Professor", "1")
 		XCTAssertEqual(name.firstName, "Philip", "1")
 		XCTAssertEqual(name.lastName, "Wilksch", "1")
 		
@@ -54,7 +54,7 @@ class NameFormatterDemoTests: XCTestCase {
 		
 		nameString = "Professor Harry McLean"
 		name = formatter.nameFrom(string: nameString)
-		XCTAssertEqual(name.prefix, "Professsor", "1")
+		XCTAssertEqual(name.prefix, "Professor", "1")
 		XCTAssertEqual(name.firstName, "Harry", "1")
 		XCTAssertEqual(name.lastName, "McLean", "1")
 		
@@ -116,6 +116,21 @@ class NameFormatterDemoTests: XCTestCase {
 		XCTAssertEqual(name.prefix, "Ms", "1")
 		XCTAssertEqual(name.firstName, "Kane", "1")
 		XCTAssertEqual(name.lastName, "Van Oorschot", "1")
+		
+	}
+	
+	func testSpanishStyleNames() {
+		// This is an example of a functional test case.
+		XCTAssert(true, "Pass")
+		var nameString:String!
+		var name:YZName!
+		let formatter = YZNameFormatter()
+		
+		nameString = "Horacio de la Costa"
+		name = formatter.nameFrom(string: nameString)
+		XCTAssertEqual(name.prefix, "", "1")
+		XCTAssertEqual(name.firstName, "Horacio", "1")
+		XCTAssertEqual(name.lastName, "e la Costa", "1")
 		
 	}
 
