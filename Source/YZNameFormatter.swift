@@ -10,7 +10,7 @@
 
 (.*)Prof(\S)*\s
 
-((.*)Prof(\S)*\s|Miss|Mrs|Mr|Dr)
+((.*)Prof(\S)*\s|(Miss|Mrs|Mr|Dr)\s)
 
 Assoc Professsor Eve Fallshaw
 Emeritus Prof Helen Praetz
@@ -34,30 +34,66 @@ class YZNameFormatter {
 		let name = YZName()
 		
 		let fullName = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) as NSString
+		var nameWithOutPrefix = fullName
 		
-		var additionalPrefixArray = [ "mr", "mrs", "ms", "miss", "dr" ]
+		let additionalPrefixArray = [ "mr", "mrs", "ms", "miss", "dr" ]
 		let additionalPrefixRegexString = "|".join(additionalPrefixArray)
-		let prefixRegexString = "((.*)Prof(\\S)*\\s|\(additionalPrefixRegexString))"
 		
-		if let prefixRegex = NSRegularExpression(pattern: prefixRegexString, options: NSRegularExpressionOptions.CaseInsensitive, error: error) {
-			prefixRegex.enumerateMatchesInString(
+		// ((.*)Prof(\S)*\s|(Miss|Mrs|Mr|Dr)\s)
+		let prefixRegexString = "((.*)Prof(\\S)*\\s|(\(additionalPrefixRegexString))\\s)"
+		
+		if let regex = NSRegularExpression(pattern: prefixRegexString, options: NSRegularExpressionOptions.CaseInsensitive, error: error) {
+			
+			regex.enumerateMatchesInString(
 				fullName,
 				options: NSMatchingOptions.allZeros,
 				range: fullName.rangeOfString(fullName),
 				usingBlock: { (result:NSTextCheckingResult!, flags:NSMatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
 					name.prefix = fullName.substringWithRange(result.range).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+					nameWithOutPrefix = (fullName as String).stringByReplacingOccurrencesOfString(name.prefix, withString: "", options: NSStringCompareOptions.allZeros).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 					stop.memory = true
 					return
 			})
 		}
 		
-		let compoundArray = ["vere","von","van","de","del","della","di","da","pietro","vanden","du","st.","st","la","ter"]
+		let additionalCompoundArray = ["vere","von","van","de","del","della","di","da","pietro","vanden","du","st.","st","la","ter"]
+		let additionalCompoundRegexString = "|".join(additionalCompoundArray)
+		let compoundRegexString = "\\s(\(additionalCompoundRegexString))\\s"
+		if let regex = NSRegularExpression(pattern: compoundRegexString, options: NSRegularExpressionOptions.CaseInsensitive, error: error) {
+			
+			regex.enumerateMatchesInString(
+				nameWithOutPrefix,
+				options: NSMatchingOptions.allZeros,
+				range: nameWithOutPrefix.rangeOfString(nameWithOutPrefix),
+				usingBlock: { (result:NSTextCheckingResult!, flags:NSMatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+					
+					name.lastName = nameWithOutPrefix.substringFromIndex(result.range.location).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+					name.firstName = (nameWithOutPrefix as String).stringByReplacingOccurrencesOfString(name.lastName, withString: "", options: .allZeros).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+					stop.memory = true
+					return
+			})
+		}
+		
+		if name.lastName.isEmpty == true {
+			let lastWhiteSpaceRange = nameWithOutPrefix.rangeOfString(" ", options: NSStringCompareOptions.BackwardsSearch)
+			
+			if lastWhiteSpaceRange.location == NSNotFound {
+				if name.prefix.isEmpty == true {
+					name.firstName = nameWithOutPrefix
+				} else {
+					name.lastName = nameWithOutPrefix
+				}
+			} else {
+				name.firstName = nameWithOutPrefix.substringToIndex(lastWhiteSpaceRange.location)
+				name.lastName = nameWithOutPrefix.substringFromIndex(NSMaxRange(lastWhiteSpaceRange))
+			}
+		}
 		
 		return name
 	}
 }
 
-class YZName : NSObject {
+class YZName {
 	var prefix = ""
 	var firstName = ""
 	var lastName = ""
