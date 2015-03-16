@@ -28,7 +28,7 @@ import Foundation
 import UIKit
 import AddressBook
 
-class YZNameFormatter {
+class YZNameFormatter : NSObject {
 	
 	func nameFrom(#string:String, error:AutoreleasingUnsafeMutablePointer<NSError?> = nil) -> YZName {
 		let name = YZName()
@@ -126,7 +126,7 @@ class YZNameFormatter {
 	}
 }
 
-class YZName {
+class YZName : NSObject {
 	var prefix = ""
 	var firstName = ""
 	var lastName = ""
