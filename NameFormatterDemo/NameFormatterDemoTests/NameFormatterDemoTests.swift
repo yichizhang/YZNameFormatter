@@ -130,7 +130,7 @@ class NameFormatterDemoTests: XCTestCase {
 		name = formatter.nameFrom(string: nameString)
 		XCTAssertEqual(name.prefix, "", "1")
 		XCTAssertEqual(name.firstName, "Horacio", "1")
-		XCTAssertEqual(name.lastName, "e la Costa", "1")
+		XCTAssertEqual(name.lastName, "de la Costa", "1")
 		
 	}
 
