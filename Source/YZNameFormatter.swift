@@ -48,9 +48,9 @@ class YZNameFormatter : NSObject {
 		if let regex = NSRegularExpression(pattern: regexPatternString, options: NSRegularExpressionOptions.CaseInsensitive, error: error) {
 			
 			regex.enumerateMatchesInString(
-				fullName,
+				fullName as String,
 				options: NSMatchingOptions.allZeros,
-				range: fullName.rangeOfString(fullName),
+				range: fullName.rangeOfString(fullName as String),
 				usingBlock: { (result:NSTextCheckingResult!, flags:NSMatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
 					
 					name.prefix = fullName.substringWithRange(result.range).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -67,9 +67,9 @@ class YZNameFormatter : NSObject {
 		if let regex = NSRegularExpression(pattern: regexPatternString, options: NSRegularExpressionOptions.CaseInsensitive, error: error) {
 			
 			regex.enumerateMatchesInString(
-				nameWithOutPrefix,
+				nameWithOutPrefix as String,
 				options: NSMatchingOptions.allZeros,
-				range: nameWithOutPrefix.rangeOfString(nameWithOutPrefix),
+				range: nameWithOutPrefix.rangeOfString(nameWithOutPrefix as String),
 				usingBlock: { (result:NSTextCheckingResult!, flags:NSMatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
 					
 					name.lastName = nameWithOutPrefix.substringFromIndex(result.range.location).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -88,9 +88,9 @@ class YZNameFormatter : NSObject {
 			if let regex = NSRegularExpression(pattern: regexPatternString, options: NSRegularExpressionOptions.CaseInsensitive, error: error) {
 				
 				regex.enumerateMatchesInString(
-					nameWithOutPrefix,
+					nameWithOutPrefix as String,
 					options: NSMatchingOptions.allZeros,
-					range: nameWithOutPrefix.rangeOfString(nameWithOutPrefix),
+					range: nameWithOutPrefix.rangeOfString(nameWithOutPrefix as String),
 					usingBlock: { (result:NSTextCheckingResult!, flags:NSMatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
 						
 						name.lastName = nameWithOutPrefix.substringFromIndex(result.range.location).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -109,11 +109,11 @@ class YZNameFormatter : NSObject {
 			if lastWhiteSpaceRange.location == NSNotFound {
 				if name.prefix.isEmpty == true {
 					// If no prefix is found, and no space is found, the string is probably first name only
-					name.firstName = nameWithOutPrefix
+					name.firstName = nameWithOutPrefix as String
 				} else {
 					// If a prefix is found, and no space is found in the rest of the name, the string is probably
 					// a combination of prefix and last name, e.g. something like "Mr McLean"
-					name.lastName = nameWithOutPrefix
+					name.lastName = nameWithOutPrefix as String
 				}
 			} else {
 				// A space is found. Take the portion behind the space as the last name and the rest as the first name.
